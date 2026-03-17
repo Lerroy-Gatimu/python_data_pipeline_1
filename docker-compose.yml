@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword123
+      MYSQL_DATABASE: pipeline_db
+      MYSQL_USER: pipeline
+      MYSQL_PASSWORD: pipeline123secret
+    ports:
+      - "3307:3306"               # map to 3307 on host → avoid conflict with local MySQL
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks:
+      - pipeline-net
+
+  pipeline:
+    build: .
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      # These override .env file when running in Docker
+      DB_HOST: mysql                 # service name = hostname in Docker network
+      DB_PORT: 3306
+      DB_USER: pipeline
+      DB_PASSWORD: pipeline123secret
+      DB_NAME: pipeline_db
+      # You can also mount .env if you prefer → see comment below
+    volumes:
+      - .:/app
+      # Optional: mount logs & data folders if you want persistence outside container
+      # - ./logs:/app/logs
+      # - ./data:/app/data
+    command: ["python", "-m", "src.pipeline"]
+    networks:
+      - pipeline-net
+
+volumes:
+  mysql-data:
+
+networks:
+  pipeline-net:
+    driver: bridge
