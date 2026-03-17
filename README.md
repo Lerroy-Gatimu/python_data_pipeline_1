@@ -16,7 +16,7 @@ python_data_pipeline_1/
 ├── logs/               ← pipeline.log
 ├── config/config.py
 ├── src/
-    |──__init__.py
+|    |──__init__.py
 │   ├── extract.py
 │   ├── transform.py
 │   ├── load.py
@@ -35,5 +35,5 @@ text## Installation
 
 ## Usage
 
-```bash
+bash:
 python -m src.pipeline
