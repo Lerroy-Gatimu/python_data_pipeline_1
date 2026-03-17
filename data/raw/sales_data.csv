@@ -1,0 +1,5 @@
+transaction_id,customer_name,customer_email,product,quantity,unit_price,transaction_date
+TXN001,John Doe,john@example.com,Laptop,2,999.99,2025-03-01
+TXN002,Jane Smith,jane@test.com,Mouse,5,29.99,2025-03-02
+TXN003,Bob Johnson,,Keyboard,1,79.99,2025-03-03
+TXN004,Alice Brown,alice@company.com,Monitor,1,249.99,2025-03-03

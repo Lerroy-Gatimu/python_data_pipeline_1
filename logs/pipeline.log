@@ -1,0 +1,10 @@
+2026-03-17 17:52:35 - INFO - ==================================================
+2026-03-17 17:52:35 - INFO - STARTING PYTHON DATA PIPELINE 1
+2026-03-17 17:52:35 - INFO - ==================================================
+2026-03-17 17:52:35 - INFO - Starting extraction from CSV...
+2026-03-17 17:52:35 - INFO - Extracted 4 rows from data/raw/sales_data.csv
+2026-03-17 17:52:35 - INFO - Starting transformation...
+2026-03-17 17:52:35 - INFO - Transformation complete. Final shape: (4, 8)
+2026-03-17 17:52:35 - INFO - Starting load to MySQL...
+2026-03-17 17:52:37 - INFO - Successfully loaded 4 rows into MySQL table 'sales'
+2026-03-17 17:52:37 - INFO - \u2705 PIPELINE COMPLETED SUCCESSFULLY in 0:00:01.917356
