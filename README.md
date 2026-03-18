@@ -37,3 +37,6 @@ text## Installation
 
 bash:
 python -m src.pipeline
+
+## Dockerized version
+Files: dockerfile, docker-compose.yml, .dockerignore

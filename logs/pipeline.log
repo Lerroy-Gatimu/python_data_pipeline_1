@@ -18,3 +18,13 @@
 2026-03-18 09:41:40 - INFO - Starting load to MySQL...
 2026-03-18 09:41:42 - ERROR - Load failed: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
 2026-03-18 09:41:42 - ERROR - ❌ PIPELINE FAILED: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods
+2026-03-18 10:14:41 - INFO - ==================================================
+2026-03-18 10:14:41 - INFO - STARTING PYTHON DATA PIPELINE 1
+2026-03-18 10:14:41 - INFO - ==================================================
+2026-03-18 10:14:41 - INFO - Starting extraction from CSV...
+2026-03-18 10:14:41 - INFO - Extracted 4 rows from data/raw/sales_data.csv
+2026-03-18 10:14:41 - INFO - Starting transformation...
+2026-03-18 10:14:41 - INFO - Transformation complete. Final shape: (4, 8)
+2026-03-18 10:14:41 - INFO - Starting load to MySQL...
+2026-03-18 10:14:42 - INFO - Successfully loaded 4 rows into MySQL table 'sales'
+2026-03-18 10:14:42 - INFO - ✅ PIPELINE COMPLETED SUCCESSFULLY in 0:00:00.990556
