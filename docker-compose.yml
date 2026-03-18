@@ -6,19 +6,20 @@ services:
     image: mysql:8.0
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword123
-      MYSQL_DATABASE: pipeline_db
-      MYSQL_USER: pipeline
-      MYSQL_PASSWORD: pipeline123secret
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "3307:3306"               # map to 3307 on host → avoid conflict with local MySQL
+      - "3307:3306"
     volumes:
       - mysql-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 5s
-      timeout: 5s
-      retries: 20
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}" ]
+      interval: 10s
+      timeout: 10s
+      retries: 30 
+      start_period: 30s
     networks:
       - pipeline-net
 
@@ -28,24 +29,24 @@ services:
       mysql:
         condition: service_healthy
     environment:
-      # These override .env file when running in Docker
-      DB_HOST: mysql                 # service name = hostname in Docker network
+      DB_HOST: mysql # service name = hostname in Docker network
       DB_PORT: 3306
-      DB_USER: pipeline
-      DB_PASSWORD: pipeline123secret
-      DB_NAME: pipeline_db
-      # You can also mount .env if you prefer → see comment below
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+
     volumes:
       - .:/app
       # Optional: mount logs & data folders if you want persistence outside container
       # - ./logs:/app/logs
       # - ./data:/app/data
-    command: ["python", "-m", "src.pipeline"]
+    command: [ "python", "-m", "src.pipeline" ]
     networks:
       - pipeline-net
 
 volumes:
   mysql-data:
+
 
 networks:
   pipeline-net:
